@@ -10,7 +10,7 @@ class TicTacToe {
     this.ui = new UI();
 
     this.game = new Game(this.board, this.gameState, this.ui);
-    this.game.start();
+    this.game.init();
   }
 }
 document.addEventListener("DOMContentLoaded", () => {
