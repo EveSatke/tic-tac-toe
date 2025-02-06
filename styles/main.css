@@ -70,7 +70,6 @@ h1 {
 
 .cell {
   aspect-ratio: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,6 +80,11 @@ h1 {
   font-weight: bold;
   color: #fff;
 }
+
+.cell.highlight {
+  background-color: #f72585;
+}
+
 .restart-button {
   display: flex;
   justify-content: center;
@@ -120,6 +124,18 @@ h1 {
 
 .info-text.game-end {
   animation: endGamePulse 1s ease-in-out infinite;
+}
+
+.cell.game-over {
+  cursor: default;
+}
+
+.cell.game-over:hover {
+  background-color: #7209b7;
+}
+
+.cell.highlight:hover {
+  background-color: #f72585;
 }
 
 @media screen and (min-width: 500px) {

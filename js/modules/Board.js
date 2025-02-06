@@ -18,6 +18,20 @@ export default class Board {
       : false;
   }
 
+  makeAiMove(symbol) {
+    const availableMoves = this.board
+      .map((cell, index) => index)
+      .filter((index) => this.board[index] === null);
+
+    if (availableMoves.length > 0) {
+      const randomIndex = Math.floor(Math.random() * availableMoves.length);
+      const moveIndex = availableMoves[randomIndex];
+      this.board[moveIndex] = symbol;
+      return moveIndex;
+    }
+    return null;
+  }
+
   isValidMove(index) {
     return this.board[index] === null;
   }
@@ -29,10 +43,10 @@ export default class Board {
         this.board[combination[1]] === player &&
         this.board[combination[2]] === player
       ) {
-        return true;
+        return { isWin: true, combination: combination };
       }
     }
-    return false;
+    return { isWin: false, combination: null };
   }
 
   checkDraw() {
