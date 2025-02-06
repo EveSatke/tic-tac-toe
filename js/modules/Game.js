@@ -7,6 +7,7 @@ export default class Game {
     this.ui = ui;
     this.playerX = new Player("X");
     this.playerO = new Player("O");
+    this.isAiTurn = false;
   }
 
   start() {
@@ -22,10 +23,16 @@ export default class Game {
   }
 
   handleCellClick(index) {
+    if (this.isAiTurn) return;
+
     if (this.gameState.isGameActive && this.board.isValidMove(index)) {
       this.makePlayerMove(index);
+      this.isAiTurn = true;
       if (!this.gameState.isGameActive) return;
-      setTimeout(() => this.makeAiMove(), 500);
+      setTimeout(() => {
+        this.makeAiMove();
+        this.isAiTurn = false;
+      }, 500);
     }
   }
 
@@ -74,6 +81,7 @@ export default class Game {
     this.board.reset();
     this.gameState.reset();
     this.ui.resetDisplay();
+    this.isAiTurn = false;
     this.ui.updateStatus(`Player ${this.gameState.getCurrentPlayer()} turn`);
   }
 }
