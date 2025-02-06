@@ -8,6 +8,20 @@ export default class Game {
     this.playerX = new Player("X");
     this.playerO = new Player("O");
     this.isAiTurn = false;
+    this.isAiMode = false;
+  }
+
+  init() {
+    this.ui.addHumanModeSelectionListener(() => {
+      this.isAiMode = false;
+      this.ui.showGame();
+    });
+    this.ui.addComputerModeSelectionListener(() => {
+      this.isAiMode = true;
+      this.ui.showGame();
+    });
+
+    this.start();
   }
 
   start() {
@@ -22,17 +36,23 @@ export default class Game {
     this.ui.updateStatus(`Player ${this.gameState.getCurrentPlayer()} turn`);
   }
 
+  handleComputerMode() {}
+
   handleCellClick(index) {
     if (this.isAiTurn) return;
 
     if (this.gameState.isGameActive && this.board.isValidMove(index)) {
       this.makePlayerMove(index);
-      this.isAiTurn = true;
+
       if (!this.gameState.isGameActive) return;
-      setTimeout(() => {
-        this.makeAiMove();
-        this.isAiTurn = false;
-      }, 500);
+
+      if (this.isAiMode) {
+        this.isAiTurn = true;
+        setTimeout(() => {
+          this.makeAiMove();
+          this.isAiTurn = false;
+        }, 500);
+      }
     }
   }
 

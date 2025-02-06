@@ -3,6 +3,10 @@ export default class UI {
     this.cells = document.querySelectorAll(".cell");
     this.status = document.querySelector(".info-text");
     this.resetButton = document.querySelector(".restart-button");
+    this.modeSelection = document.querySelector(".mode-selection");
+    this.gameContainer = document.querySelector(".game-container");
+    this.modeHumanButton = document.getElementById("human-vs-human");
+    this.modeComputerButton = document.getElementById("human-vs-computer");
   }
 
   updateCell(index, symbol) {
@@ -16,6 +20,11 @@ export default class UI {
     } else {
       this.status.classList.remove("game-end");
     }
+  }
+
+  showGame() {
+    this.modeSelection.classList.add("hidden");
+    this.gameContainer.classList.remove("hidden");
   }
 
   highlightCells(combination) {
@@ -34,11 +43,21 @@ export default class UI {
     });
     this.status.classList.remove("game-end");
   }
+
+  addHumanModeSelectionListener(callback) {
+    this.modeHumanButton.addEventListener("click", callback);
+  }
+
+  addComputerModeSelectionListener(callback) {
+    this.modeComputerButton.addEventListener("click", callback);
+  }
+
   addCellClickListener(callback) {
     this.cells.forEach((cell, index) => {
       cell.addEventListener("click", () => callback(cell, index));
     });
   }
+
   addResetButtonListener(callback) {
     this.resetButton.addEventListener("click", callback);
   }
