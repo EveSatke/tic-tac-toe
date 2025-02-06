@@ -12,12 +12,26 @@ export default class UI {
     this.status.innerText = message;
     if (isGameEnd) {
       this.status.classList.add("game-end");
+      this.cells.forEach((cell) => cell.classList.add("game-over"));
     } else {
       this.status.classList.remove("game-end");
     }
   }
+
+  highlightCells(combination) {
+    if (combination) {
+      combination.forEach((index) =>
+        this.cells[index].classList.add("highlight")
+      );
+    }
+  }
+
   resetDisplay() {
-    this.cells.forEach((item) => (item.innerText = ""));
+    this.cells.forEach((cell) => {
+      cell.innerText = "";
+      cell.classList.remove("game-over");
+      cell.classList.remove("highlight");
+    });
     this.status.classList.remove("game-end");
   }
   addCellClickListener(callback) {

@@ -58,7 +58,7 @@ h1 {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   background-color: #240046;
   width: 100%;
   max-width: 400px;
@@ -70,21 +70,25 @@ h1 {
 
 .cell {
   aspect-ratio: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #7209b7;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #fff;
 }
+
+.cell.highlight {
+  background-color: #f72585;
+}
+
 .restart-button {
   display: flex;
   justify-content: center;
-  padding: 30px 0;
+  padding: 20px 0;
   background-color: #fff;
   margin-top: 1rem;
   border-radius: 1rem;
@@ -94,6 +98,7 @@ h1 {
   font-size: 1.5rem;
   color: #240046;
   cursor: pointer;
+  border: none;
 }
 
 .restart-button:hover {
@@ -120,6 +125,18 @@ h1 {
 
 .info-text.game-end {
   animation: endGamePulse 1s ease-in-out infinite;
+}
+
+.cell.game-over {
+  cursor: default;
+}
+
+.cell.game-over:hover {
+  background-color: #7209b7;
+}
+
+.cell.highlight:hover {
+  background-color: #f72585;
 }
 
 @media screen and (min-width: 500px) {
