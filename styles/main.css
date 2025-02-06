@@ -96,8 +96,30 @@ h1 {
   cursor: pointer;
 }
 
+.restart-button:hover {
+  background-color: #f72585;
+  color: #fff;
+}
+
 .cell:hover {
   background-color: #f72585;
+}
+
+@keyframes endGamePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+    color: #f72585;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.info-text.game-end {
+  animation: endGamePulse 1s ease-in-out infinite;
 }
 
 @media screen and (min-width: 500px) {

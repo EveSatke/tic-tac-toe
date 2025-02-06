@@ -8,11 +8,17 @@ export default class UI {
   updateCell(index, symbol) {
     this.cells[index].innerText = symbol;
   }
-  updateStatus(message) {
+  updateStatus(message, isGameEnd = false) {
     this.status.innerText = message;
+    if (isGameEnd) {
+      this.status.classList.add("game-end");
+    } else {
+      this.status.classList.remove("game-end");
+    }
   }
   resetDisplay() {
     this.cells.forEach((item) => (item.innerText = ""));
+    this.status.classList.remove("game-end");
   }
   addCellClickListener(callback) {
     this.cells.forEach((cell, index) => {
