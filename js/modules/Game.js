@@ -30,10 +30,10 @@ export default class Game {
 
       if (this.board.checkWin(currentPlayer)) {
         this.gameState.setGameOver(currentPlayer);
-        this.ui.updateStatus(`Player ${currentPlayer} wins!`);
+        this.ui.updateStatus(`Player ${currentPlayer} wins!`, true);
       } else if (this.board.checkDraw()) {
         this.gameState.setDraw();
-        this.ui.updateStatus("Game is a draw");
+        this.ui.updateStatus("Game is a draw!", true);
       } else {
         this.gameState.switchPlayer();
         this.ui.updateStatus(
@@ -42,5 +42,10 @@ export default class Game {
       }
     }
   }
-  resetGame() {}
+  resetGame() {
+    this.board.reset();
+    this.gameState.reset();
+    this.ui.resetDisplay();
+    this.ui.updateStatus(`Player ${this.gameState.getCurrentPlayer()} turn`);
+  }
 }

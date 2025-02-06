@@ -13,12 +13,9 @@ export default class Board {
     ];
   }
   makeMove(index, symbol) {
-    if (this.isValidMove(index)) {
-      this.board[index] = symbol;
-      return true;
-    } else {
-      return false;
-    }
+    return this.isValidMove(index)
+      ? ((this.board[index] = symbol), true)
+      : false;
   }
 
   isValidMove(index) {
@@ -28,9 +25,9 @@ export default class Board {
   checkWin(player) {
     for (let combination of this.winningCombinations) {
       if (
-        this.board[combination[0]] === player.symbol &&
-        this.board[combination[1]] === player.symbol &&
-        this.board[combination[2]] === player.symbol
+        this.board[combination[0]] === player &&
+        this.board[combination[1]] === player &&
+        this.board[combination[2]] === player
       ) {
         return true;
       }
@@ -39,11 +36,11 @@ export default class Board {
   }
 
   checkDraw() {
-    this.board.every((item) => item !== "null");
+    return this.board.every((cell) => cell !== null);
   }
 
   reset() {
-    this.board.forEach((item) => (item = ""));
+    this.board = Array(9).fill(null);
   }
 
   getCurrentState() {
