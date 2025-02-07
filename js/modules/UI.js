@@ -32,6 +32,7 @@ export default class UI {
   showGame() {
     this.modeSelection.classList.add("hidden");
     this.gameContainer.classList.remove("hidden");
+    this.changeModeButton.classList.remove("hidden");
   }
 
   highlightCells(combination) {
@@ -113,6 +114,7 @@ export default class UI {
   showModeSelection() {
     this.gameContainer.classList.add("hidden");
     this.modeSelection.classList.remove("hidden");
+    this.changeModeButton.classList.add("hidden");
     this.resetDisplay();
   }
 
