@@ -18,19 +18,27 @@ main {
 body {
   font-family: "Roboto", sans-serif;
 }
-
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  margin-bottom: 1rem;
+}
 h1 {
   color: #f72585;
   text-align: center;
   margin: 0;
-  font-size: 2rem;
+  font-size: 3rem;
+  width: 100%;
 }
 
 .game-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem;
+  padding: 0 1rem;
   border-radius: 1rem;
   align-items: center;
   width: 100%;
@@ -228,21 +236,16 @@ button.start-button:hover {
 }
 
 .change-mode-button {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-  background-color: #240046;
-  margin-top: 1rem;
-  border-radius: 1rem;
-  max-width: 400px;
-  width: 100%;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: #fff;
   cursor: pointer;
-  border: none;
+  position: absolute;
+  left: 0;
 }
 
 .change-mode-button:hover {
   color: #f72585;
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
 }
