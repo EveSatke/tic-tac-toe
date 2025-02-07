@@ -5,8 +5,15 @@ export default class UI {
     this.resetButton = document.querySelector(".restart-button");
     this.modeSelection = document.querySelector(".mode-selection");
     this.gameContainer = document.querySelector(".game-container");
+    this.boardSizeButtons = document.querySelectorAll(".board-size-button");
     this.modeHumanButton = document.getElementById("human-vs-human");
     this.modeComputerButton = document.getElementById("human-vs-computer");
+    this.modeButtons = document.querySelectorAll(".mode-button");
+    this.startButton = document.querySelector(".start-button");
+    this.boardSize = 3;
+    this.board = document.querySelector(".game-board");
+    this.setBoardSize(this.boardSize);
+    this.changeModeButton = document.querySelector(".change-mode-button");
   }
 
   updateCell(index, symbol) {
@@ -35,6 +42,29 @@ export default class UI {
     }
   }
 
+  toggleButtonSelection(clickedButton, buttonGroup) {
+    buttonGroup.forEach((button) => {
+      button.classList.remove("selected");
+    });
+    clickedButton.classList.add("selected");
+  }
+
+  addButtonSelectionListeners() {
+    this.boardSizeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        this.toggleButtonSelection(button, this.boardSizeButtons);
+        const size = button.textContent.startsWith("3") ? 3 : 4;
+        this.setBoardSize(size);
+      });
+    });
+
+    this.modeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        this.toggleButtonSelection(button, this.modeButtons);
+      });
+    });
+  }
+
   resetDisplay() {
     this.cells.forEach((cell) => {
       cell.innerText = "";
@@ -52,6 +82,10 @@ export default class UI {
     this.modeComputerButton.addEventListener("click", callback);
   }
 
+  addStartButtonListener(callback) {
+    this.startButton.addEventListener("click", callback);
+  }
+
   addCellClickListener(callback) {
     this.cells.forEach((cell, index) => {
       cell.addEventListener("click", () => callback(cell, index));
@@ -60,5 +94,29 @@ export default class UI {
 
   addResetButtonListener(callback) {
     this.resetButton.addEventListener("click", callback);
+  }
+
+  setBoardSize(size) {
+    this.boardSize = size;
+    this.board.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+    // Show/hide cells based on board size
+    this.cells.forEach((cell, index) => {
+      if (index < size * size) {
+        cell.style.display = "flex";
+      } else {
+        cell.style.display = "none";
+      }
+    });
+  }
+
+  showModeSelection() {
+    this.gameContainer.classList.add("hidden");
+    this.modeSelection.classList.remove("hidden");
+    this.resetDisplay();
+  }
+
+  addChangeModeButtonListener(callback) {
+    this.changeModeButton.addEventListener("click", callback);
   }
 }

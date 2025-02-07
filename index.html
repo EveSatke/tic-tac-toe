@@ -11,11 +11,22 @@
     <main>
       <h1>tic-tac-toe</h1>
       <div class="mode-selection">
+        <p class="mode-selection-text">Select board size ⬇</p>
+
+        <div class="board-size-selection">
+          <button class="board-size-button selected">3x3</button>
+          <button class="board-size-button">4x4</button>
+        </div>
         <p class="mode-selection-text">Select mode ⬇</p>
-        <button class="mode-button" id="human-vs-human">Human vs Human</button>
-        <button class="mode-button" id="human-vs-computer">
-          Human vs Computer
-        </button>
+        <div class="mode-selection-buttons">
+          <button class="mode-button selected" id="human-vs-computer">
+            Human vs Computer
+          </button>
+          <button class="mode-button" id="human-vs-human">
+            Human vs Human
+          </button>
+          <button class="start-button">Start</button>
+        </div>
       </div>
       <div class="game-container hidden">
         <div class="game-info">
@@ -40,6 +51,7 @@
           <div class="cell"></div>
         </div>
         <button class="restart-button">New game</button>
+        <div class="change-mode-button">⬅ Back to mode selection</div>
       </div>
     </main>
   </body>
