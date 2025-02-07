@@ -85,7 +85,7 @@ h1 {
   background-color: #7209b7;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: bold;
   color: #fff;
 }
@@ -227,12 +227,6 @@ button:hover:not(.selected) {
 
 button.start-button:hover {
   background-color: #6509a1;
-}
-
-@media screen and (min-width: 500px) {
-  .cell {
-    font-size: 4rem;
-  }
 }
 
 .change-mode-button {
