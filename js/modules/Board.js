@@ -1,19 +1,44 @@
 export default class Board {
-  constructor() {
-    this.board = Array(16).fill(null);
-    this.winningCombinations = [
-      [0, 1, 2, 3],
-      [4, 5, 6, 7],
-      [8, 9, 10, 11],
-      [12, 13, 14, 15],
-      [0, 4, 8, 12],
-      [1, 5, 9, 13],
-      [2, 6, 10, 14],
-      [3, 7, 11, 15],
-      [0, 5, 10, 15],
-      [3, 6, 9, 12],
-    ];
+  constructor(size = 3) {
+    this.size = size;
+    this.board = Array(size * size).fill(null);
+    this.winningCombinations = this.generateWinningCombinations();
   }
+
+  generateWinningCombinations() {
+    const combinations = [];
+    const size = this.size;
+
+    // Rows
+    for (let i = 0; i < size; i++) {
+      const row = [];
+      for (let j = 0; j < size; j++) {
+        row.push(i * size + j);
+      }
+      combinations.push(row);
+    }
+
+    // Columns
+    for (let i = 0; i < size; i++) {
+      const col = [];
+      for (let j = 0; j < size; j++) {
+        col.push(j * size + i);
+      }
+      combinations.push(col);
+    }
+
+    // Diagonals
+    const diagonal1 = [];
+    const diagonal2 = [];
+    for (let i = 0; i < size; i++) {
+      diagonal1.push(i * size + i);
+      diagonal2.push(i * size + (size - 1 - i));
+    }
+    combinations.push(diagonal1, diagonal2);
+
+    return combinations;
+  }
+
   makeMove(index, symbol) {
     return this.isValidMove(index)
       ? ((this.board[index] = symbol), true)
@@ -40,12 +65,8 @@ export default class Board {
 
   checkWin(player) {
     for (let combination of this.winningCombinations) {
-      if (
-        this.board[combination[0]] === player &&
-        this.board[combination[1]] === player &&
-        this.board[combination[2]] === player &&
-        this.board[combination[3]] === player
-      ) {
+      const isWin = combination.every((index) => this.board[index] === player);
+      if (isWin) {
         return { isWin: true, combination: combination };
       }
     }
@@ -57,7 +78,7 @@ export default class Board {
   }
 
   reset() {
-    this.board = Array(16).fill(null);
+    this.board = Array(this.size * this.size).fill(null);
   }
 
   getCurrentState() {

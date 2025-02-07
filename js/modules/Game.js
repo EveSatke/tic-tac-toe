@@ -1,4 +1,5 @@
 import Player from "./Player.js";
+import Board from "./Board.js";
 
 export default class Game {
   constructor(board, gameState, ui) {
@@ -12,13 +13,20 @@ export default class Game {
   }
 
   init() {
+    this.ui.addButtonSelectionListeners();
     this.ui.addHumanModeSelectionListener(() => {
       this.isAiMode = false;
-      this.ui.showGame();
     });
     this.ui.addComputerModeSelectionListener(() => {
       this.isAiMode = true;
+    });
+    this.ui.addStartButtonListener(() => {
+      this.board = new Board(this.ui.boardSize);
       this.ui.showGame();
+    });
+    this.ui.addChangeModeButtonListener(() => {
+      this.ui.showModeSelection();
+      this.resetGame();
     });
 
     this.start();
